@@ -3,13 +3,13 @@
     
     $id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
 
-    $msg = "";
-    if(fnDeleteJogador($id)) {
+    if(fnDeleteJogador($id)){
         $msg = "Sucesso ao deletar";
-    } else {
+    } else{
         $msg = "Falha ao deletar";
     }
 
-    #
-    header("location: listagem-de-jogadores.php?notify={$msg}");
+    $page = "listagem-de-jogadores.php";
+    setcookie('notify', $msg, time() + 10, "/brasileirao/{$page}", 'localhost');
+    header("location: {$page}");
     exit;

@@ -1,6 +1,6 @@
 <?php
     require_once('Connection.php');
-    
+
     function fnAddJogador($nome, $equipe, $idade) {
         $con = getConnection();
         $sql = "insert into jogador (nome, equipe, idade) values (:pNome, :pEquipe, :pIdade)";
@@ -17,29 +17,16 @@
         $sql = "select * from jogador";
         $result = $con->query($sql);
         $lstJogadores = array();
-
+        
         while($jogador = $result->fetch(PDO::FETCH_OBJ)){
             array_push($lstJogadores, $jogador);
         }
-        
         return $lstJogadores;
     }
 
-    function fnLocalizaJogadorPorNome($nome) {
-        $con = getConnection();
-        $sql = "select * from jogador where nome like :pNome limit 20";
-        $stmt = $con->prepare($sql);
-        $stmt->bindValue(":pNome", "%{$nome}%");
-
-        if($stmt->execute()) {
-            $stmt->setFetchMode(PDO::FETCH_OBJ);
-            return $stmt->fetchAll();
-        }
-    } 
-
     function fnLocalizaJogadorPorId($id) {
         $con = getConnection();
-        $sql = "select * from jogador where id = :pID";   
+        $sql = "select * from jogador where id = :pID";
         $stmt = $con->prepare($sql);
         $stmt->bindParam(":pID", $id);
         
@@ -68,4 +55,17 @@
         $stmt->bindParam(":pID", $id);
 
         return $stmt->execute();
+    }
+
+    function fnLogin($email, $senha) {
+        $con = getConnection();
+        $sql = "select id, email, created_at as createdAt from login where email = :pEmail and senha = :pSenha";
+        $stmt = $con->prepare($sql);
+        $stmt->bindParam(":pEmail", $email);
+        $stmt->bindValue(":pSenha", md5($senha));
+
+        if($stmt->execute()){
+            return $stmt->fetch(PDO::FETCH_OBJ);
+        }
+        return null;
     }
