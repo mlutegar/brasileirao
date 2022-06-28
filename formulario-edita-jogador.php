@@ -26,7 +26,7 @@
             <legend>Edição de Jogador</legend>
             <form action="editaJogador.php" method="post" class="form">
                 <div>
-                    <input type="hidden" name="idJogador" id="jogadorId" class="form-control" value="<?= $jogador->id ?>"> 
+                    <input type="hidden" name="idJogador" id="jogadorId" value="<?= $jogador->id ?>"> 
                 </div>
                 <div class="mb-3 form-group">
                     <label for="nomeId" class="form-label">Nome</label>

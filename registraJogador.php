@@ -5,10 +5,14 @@
     $equipe = filter_input(INPUT_POST, 'equipe', FILTER_SANITIZE_SPECIAL_CHARS);
     $idade = filter_input(INPUT_POST, 'idade', FILTER_SANITIZE_NUMBER_INT);
 
-    if(fnAddJogador($nome, $equipe, $idade)) {
-        $msg = "Sucesso ao adicionar o jogador do " . $equipe;
+    if(empty($nome) || empty($equipe) || empty($idade)){
+        $msg = "Preencher todos os campos primeiro";
     } else {
-        $msg = "Falha ao adicionar o jogador";
+        if(fnAddJogador($nome, $equipe, $idade)) {
+            $msg = "Sucesso ao adicionar o jogador do " . $equipe;
+        } else {
+            $msg = "Falha ao adicionar o jogador";
+        }
     }
 
     $page = "formulario-cadastro-jogador.php";

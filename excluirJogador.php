@@ -1,13 +1,14 @@
 <?php
     require_once('repository/JogadorRepository.php');
-    
-    $id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
+    session_start();
 
-    if(fnDeleteJogador($id)){
+    if(fnDeleteJogador($_SESSION['id'])){
         $msg = "Sucesso ao deletar";
     } else{
         $msg = "Falha ao deletar";
     }
+
+    unset($_SESSION['id']);
 
     $page = "listagem-de-jogadores.php";
     setcookie('notify', $msg, time() + 10, "/brasileirao/{$page}", 'localhost');

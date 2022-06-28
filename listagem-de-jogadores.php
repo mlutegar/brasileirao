@@ -35,8 +35,8 @@
                     <td><?= $jogador->equipe ?></td>
                     <td><?= $jogador->idade ?></td>
                     <td><?= $jogador->created_at ?></td>
-                    <td><a href="formulario-edita-jogador.php?id=<?= $jogador->id?>">Editar</a></td>
-                    <td><a onclick="return confirm('Deseja realmente excluir?');" href="excluirJogador.php?id=<?= $jogador->id ?>">Excluir</a></td>
+                    <td><a href="#" onclick="gerirJogador(<?= $jogador->id ?>, 'edit');">Editar</a></td> 
+                    <td><a onclick="return confirm('Deseja realmente excluir?') ? gerirJogador(<?= $jogador->id?>, 'del') : '';" href="#">Excluir</a></td> 
                 </tr>
             <?php endforeach; ?>
             </tbody>
@@ -50,5 +50,31 @@
         </table>
     </div>
     <?php include("rodape.php"); ?>
+    <script>
+        window.post = (data) => {
+            return fetch(
+                'set-session.php',
+                {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(data)
+                }
+            )
+            .then(response => {
+                console.log(`Requisição completa! Resposta:`, response);
+            });
+        }
+
+        function gerirJogador(id, action) {
+            
+            post({data : id});
+
+            url = 'excluirJogador.php';
+            if(action === 'edit')
+                url = 'formulario-edita-jogador.php';
+                
+            window.location.href = url;
+        }
+    </script>
   </body>
 </html>
