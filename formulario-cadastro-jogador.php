@@ -15,18 +15,23 @@
             <legend>Cadastro do Jogador</legend>
             <form action="registraJogador.php" method="post" class="form" enctype="multipart/form-data">
               <div class="card col-4 offset-4">
-              <svg class="bd-placeholder-img card-img-top" width="100%" height="180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Foto do jogador" preserveAspectRatio="xMidYMid slice" focusable="false">
-                <title>Placeholder</title>
-                <rect width="100%" height="100%" fill="#868e96"></rect><text x="50%" y="50%" fill="#dee2e6" dy=".3em">Foto do jogador</text>
-              </svg>
+                <svg class="bd-placeholder-img card-img-top" width="100%" height="180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Foto do jogador" preserveAspectRatio="xMidYMid slice" focusable="false">
+                  <title>Placeholder</title>
+                  <rect width="100%" height="100%" fill="#868e96"></rect><text x="50%" y="50%" fill="#dee2e6" dy=".3em">Foto do jogador</text>
+                </svg>
+              </div>
+              <div class="mb-3 form-group">
+                <label for="fotoId" class="form-label">Foto</label>
+                <input type="file" name="foto" id="fotoId" class="form-control" >
+                <div id="helperFoto" class="form-text">Importe a foto</div>
               </div>
                 <div class="mb-3 form-group">
-                    <label for="nomeId" class="form-label">Nome do jogador</label>
-                    <input type="text" name="nome" id="nomeId" class="form-control" placeholder="Informe o nome do jogador">
+                  <label for="nomeId" class="form-label">Nome do jogador</label>
+                  <input type="text" name="nome" id="nomeId" class="form-control" placeholder="Informe o nome do jogador">
                 </div>
                 <div class="mb-3 form-group">
-                    <label for="equipeId" class="form-label">Equipe</label>
-                    <input type="text" name="equipe" id="equipeId" class="form-control" placeholder="Informe a equipe">
+                  <label for="equipeId" class="form-label">Equipe</label>
+                  <input type="text" name="equipe" id="equipeId" class="form-control" placeholder="Informe a equipe">
                 </div>
                 <div class="mb-3 form-group">
                     <label for="idadeId" class="form-label">Idade</label>
@@ -38,5 +43,6 @@
         </fieldset>
     </div>
     <?php include("rodape.php");?>
+    <script src="js/base64.js"></script>
   </body>
 </html>

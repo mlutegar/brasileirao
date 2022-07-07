@@ -1,11 +1,12 @@
 <?php
     require_once('Connection.php');
     
-    function fnAddJogador($nome, $equipe, $idade) {
+    function fnAddJogador($nome, $foto, $equipe, $idade) {
         $con = getConnection();
-        $sql = "insert into jogador (nome, equipe, idade) values (:pNome, :pEquipe, :pIdade)";
+        $sql = "insert into jogador (nome, foto, equipe, idade) values (:pNome, :pFoto, :pEquipe, :pIdade)";
         $stmt = $con->prepare($sql);
         $stmt->bindParam(":pNome", $nome);
+        $stmt->bindParam(":pFoto", $foto);
         $stmt->bindParam(":pEquipe", $equipe);
         $stmt->bindParam(":pIdade", $idade);
 
@@ -49,12 +50,13 @@
         return null;
     }
 
-    function fnUpdateJogador($id, $nome, $equipe, $idade) {
+    function fnUpdateJogador($id, $nome, $foto, $equipe, $idade) {
         $con = getConnection();
-        $sql = "update jogador set nome= :pNome, equipe = :pEquipe, idade = :pIdade where id = :pID";
+        $sql = "update jogador set nome= :pNome, foto = :pFoto, equipe = :pEquipe, idade = :pIdade where id = :pID";
         $stmt = $con->prepare($sql);
         $stmt->bindParam(":pID", $id);
         $stmt->bindParam(":pNome", $nome);
+        $stmt->bindParam(":pFoto", $foto); 
         $stmt->bindParam(":pEquipe", $equipe);
         $stmt->bindParam(":pIdade", $idade);
 

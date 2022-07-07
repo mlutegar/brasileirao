@@ -2,12 +2,7 @@
     include('config.php');
     require_once('repository/JogadorRepository.php');
 
-    if(isset($_SESSION['id'])) {
-        $id = $_SESSION['id'];
-    } else {
-        $id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
-    }
-    
+    $id = $_SESSION['id'];
     $jogador = fnLocalizaJogadorPorId($id);
 ?>
 
@@ -25,6 +20,14 @@
         <fieldset>
             <legend>Edição de Jogador</legend>
             <form action="editaJogador.php" method="post" class="form">
+            <div class="card col-4 offset-4 text-center">
+                    <img src="<?= $jogador->foto ?>" id="avatarId" class="rounded" alt="foto do usuário">
+                </div>
+                <div class="mb-3 form-group">
+                    <label for="fotoId" class="form-label">Foto</label>
+                    <input type="file" name="foto" id="fotoId" class="form-control">
+                    <div id="helperFoto" class="form-text">Importe a foto</div>
+                </div>
                 <div>
                     <input type="hidden" name="idJogador" id="jogadorId" value="<?= $jogador->id ?>"> 
                 </div>
@@ -49,5 +52,6 @@
         </fieldset>
     </div>
     <?php include("rodape.php"); ?>
+    <script src="js/base64.js"></script>
   </body>
 </html>
